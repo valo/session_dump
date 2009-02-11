@@ -1,8 +1,14 @@
 SessionDump
 ===========
 
-This is a small plugin, which allows the controllers to easily dump the current session at each request.
+This is a small gem, which allows the controllers to easily dump the current session at each request.
 
+Install
+=======
+
+The installation is done through ruby gems:
+
+gem install session_dump
 
 Example
 =======

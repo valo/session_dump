@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), 'version')
+
 module SessionDump
   def self.included(controller)
     # controller.extend(ClassMethods)
@@ -6,6 +8,6 @@ module SessionDump
 
   private
     def session_dump
-      logger.debug session.instance_eval { @data.inspect }
+      logger.debug "  Session: " + session.instance_eval { @data.inspect }
     end
 end
