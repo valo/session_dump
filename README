@@ -1,0 +1,18 @@
+SessionDump
+===========
+
+This is a small plugin, which allows the controllers to easily dump the current session at each request.
+
+
+Example
+=======
+
+Here it is how it is used:
+
+class ApplicationController < ActionController::Base
+  include SessionDump
+end
+
+This will cause all the controllers inheriting from ApplicationController to dump their session data after each request.
+
+Copyright (c) 2009 Valentin Mihov, released under the MIT license
