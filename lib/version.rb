@@ -2,7 +2,7 @@ module SessionDump
   module Version
     Major = '0' 
     Minor = '0' 
-    Tiny  = '1' 
+    Tiny  = '2' 
 
     class << self
       def to_s

@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'rubyforge'
 require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/gempackagetask'
@@ -8,11 +9,10 @@ PKG_NAME = 'session_dump'
 PKG_VERSION = SessionDump::Version.to_s
 PKG_FILE_NAME = "#{PKG_NAME}-#{PKG_VERSION}"
 RUBY_FORGE_PROJECT = PKG_NAME
-RUBY_FORGE_USER = ENV['RUBY_FORGE_USER'] || 'valo'
 
 RELEASE_NAME  = PKG_VERSION
-RUBY_FORGE_GROUPID = '1337'
-RUBY_FORGE_PACKAGEID = '1638'
+RUBY_FORGE_GROUPID = 7788
+RUBY_FORGE_PACKAGEID = 10329
 
 RDOC_TITLE = "Session dump"
 RDOC_EXTRAS = ["README"]
@@ -65,11 +65,11 @@ namespace 'session_dump' do
   desc "Publish the release files to RubyForge."
   task :release => [:gem, :package] do
     files = ["gem", "tgz", "zip"].map { |ext| "pkg/#{PKG_FILE_NAME}.#{ext}" }
+    
+    rubyforge = RubyForge.new
 
-    system %{rubyforge login --username #{RUBY_FORGE_USER}}
-  
-    files.each do |file|
-      system %{rubyforge add_release #{RUBY_FORGE_GROUPID} #{RUBY_FORGE_PACKAGEID} "#{RELEASE_NAME}" #{file}}
-    end
+    rubyforge.configure
+    rubyforge.login
+    rubyforge.add_release RUBY_FORGE_GROUPID, RUBY_FORGE_PACKAGEID, RELEASE_NAME, *files
   end
 end
